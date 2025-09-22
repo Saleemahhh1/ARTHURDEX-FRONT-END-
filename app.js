@@ -1,7 +1,7 @@
 // app.js (ArthurDex frontend - full flow, crash-proof)
 // IMPORTANT: Update BACKEND_URL if your backend is at a different URL
 const PROJECT_ID = "031c9ba70da1c67907ed7484f7a6aa64";
-const BACKEND_URL = "https://arthurdex.onrender.com"; // ← use your Render URL
+const BACKEND_URL = "https://arthurdex.onrender.com/api"; // ← use your Render URL
 
 /* ---------------- DOM ---------------- */
 const $ = id => document.getElementById(id);
