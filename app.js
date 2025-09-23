@@ -62,7 +62,7 @@ function modalClose(){ modalEl.classList.add('hidden'); modalEl.innerHTML=''; mo
 function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
 /* ---------------- Intro sequence ---------------- */
-const introSteps = ["SECURE SMARTEST DECENTRALIZED", "TOKENIZED REAL WORLD ASSETS", "POWERED BY HEDERA"];
+const introSteps = ["secure smartest decentralized", "okenized real world asset", "POWERED BY HEDERA"];
 async function typeWriter(targetEl, text, speed=50){
   targetEl.textContent = '';
   for(let i=0;i<text.length;i++){
@@ -99,7 +99,7 @@ function ensureVault(){ let v = loadVault(); if(!v.salt){ v.salt = cryptoRandomH
 function cryptoRandomHex(len){ const arr = crypto.getRandomValues(new Uint8Array(len)); return Array.from(arr).map(b=>b.toString(16).padStart(2,'0')).join(''); }
 
 /* --------------- Passphrase generator 18 words --------------- */
-const WORDS = ["apple","river","stone","future","cloud","trust","secure","asset","ledger","open","wallet","token","value","earth","honest","light","unity","chain","hash","proof","smart","global","peace","digital","truth","real","power","safe"];
+const WORDS = ["apple","river","stone","future","cloud","trust","secure","asset","ledger","open","Jerry","token","value","earth","honest","light","unity","chain","hash","proof","smart","global","peace","digital","truth","real","power","safe"];
 function gen18(){ return Array.from({length:18},()=>WORDS[Math.floor(Math.random()*WORDS.length)]).join(' '); }
 
 /* --------------- Network helpers (with timeout + error) --------------- */
@@ -186,7 +186,7 @@ async function showPasswordCreationAndRegister(passphrase){
     fb.textContent = 'Registering...';
     // POST to backend /auth/register
     const payload = { username: username.value.trim(), password: p1.value, passphrase };
-    const r = await guardedFetch(`${BACKEND_URL}/auth/register`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) }, 15000);
+    const r = await guardedFetch(`${BACKEND_URL}/api/auth/register`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) }, 15000);
     if(!r.ok){ fb.textContent = `Register failed: ${r.error?.message||'unknown'}`; fb.style.color='#ff9f9f'; console.warn(r.error); return; }
     // save token locally
     const token = r.data?.token;
@@ -212,7 +212,7 @@ function showLoginFlow(){
   btn.onclick = async ()=>{
     if(!u.value || !pw.value){ fb.textContent='Enter username & password'; return; }
     fb.textContent='Logging in...';
-    const r = await guardedFetch(`${BACKEND_URL}/auth/login`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ username: u.value.trim(), password: pw.value }) }, 12000);
+    const r = await guardedFetch(`${BACKEND_URL}/api/auth/login`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ username: u.value.trim(), password: pw.value }) }, 12000);
     if(!r.ok){ fb.textContent=`Login failed: ${r.error?.message||'unknown'}`; fb.style.color='#ff9f9f'; return; }
     const token = r.data?.token;
     if(token){
@@ -241,7 +241,7 @@ function showRecoveryFlow(){
     // If 18 words -> forward to backend recover endpoint (server will find user by passphrase)
     if(text.split(/\s+/).length === 18){
       fb.textContent = 'Recovering by passphrase...';
-      const r = await guardedFetch(`${BACKEND_URL}/auth/recover`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ passphrase: text }) }, 12000);
+      const r = await guardedFetch(`${BACKEND_URL}/api/auth/recover`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ passphrase: text }) }, 12000);
       if(!r.ok){ fb.textContent = `Recover failed: ${r.error?.message||'unknown'}`; fb.style.color='#ff9f9f'; return; }
       const token = r.data?.token;
       if(token){
@@ -447,7 +447,7 @@ function showSendModal(){
     if(token){
       const pw = prompt('Enter your wallet password to confirm send'); // simpler UX; can be modal
       if(!pw){ fb.textContent='Authorization cancelled'; return; }
-      const r = await guardedFetch(`${BACKEND_URL}/auth/verify-password`, { method:'POST', headers: { 'Content-Type':'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ password: pw }) }, 10000);
+      const r = await guardedFetch(`${BACKEND_URL}/api/auth/verify-password`, { method:'POST', headers: { 'Content-Type':'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ password: pw }) }, 10000);
       if(r.ok && r.data?.success){ unlocked = true; }
       else { fb.textContent='Password verification failed'; fb.style.color='#ff9f9f'; return; }
     } else {
@@ -500,7 +500,7 @@ async function askForUnlock(){
   if(!pw) return false;
   // Try verifying with backend if token present
   if(vault.auth?.token){
-    const r = await guardedFetch(`${BACKEND_URL}/auth/verify-password`, { method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${vault.auth.token}`}, body: JSON.stringify({ password: pw }) }, 8000);
+    const r = await guardedFetch(`${BACKEND_URL}/api/auth/verify-password`, { method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${vault.auth.token}`}, body: JSON.stringify({ password: pw }) }, 8000);
     return (r.ok && r.data?.success) || false;
   }
   // Local brute: if we had stored encrypted data you'd decrypt here. For now accept any non-empty for demo.
