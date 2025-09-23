@@ -62,7 +62,7 @@ function modalClose(){ modalEl.classList.add('hidden'); modalEl.innerHTML=''; mo
 function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
 /* ---------------- Intro sequence ---------------- */
-const introSteps = ["secure smartest decentralized", "okenized real world asset", "POWERED BY HEDERA"];
+const introSteps = ["secure smartest decentralized", "tokenized real world asset", "POWERED BY HEDERA"];
 async function typeWriter(targetEl, text, speed=50){
   targetEl.textContent = '';
   for(let i=0;i<text.length;i++){
