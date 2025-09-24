@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
   /* ---------------- Intro sequence (robust) ---------------- */
-  const introSteps = ["DEFIN SECURE DECENTRALIZED", "TOKENIZED REAL WORLD ASSETS", "POWERED BY HEDERA"];
+  const introSteps = ["secure smartest decentralized ", "tokenized real world asset ", "POWERED BY HEDERA"];
   async function typeWriter(targetEl, text, speed=50){
     if(!targetEl) return;
     targetEl.textContent = '';
