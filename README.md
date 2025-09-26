@@ -72,7 +72,7 @@ GitHub Pages
 Render (static site)
 
 
-Ensure that API URL (VITE_API_URL) points to your backend.
+Ensure that API URL (API_BASE_URL) points to your backend.
 
 
 ---
@@ -133,11 +133,3 @@ npm run preview	Preview production build
 📜 License
 
 MIT License © 2025 ArthurDex Team
-
-
----
-
-👉 Wannan README zai yi dai-dai da front-end React project ɗinka.
-
-Kana so in maka kuma backend README.md da cikakken bayani kamar haka domin a rarrabe su, ko ka fi buƙata na front-end README.md kawai?
-
