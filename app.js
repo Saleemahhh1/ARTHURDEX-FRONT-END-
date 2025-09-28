@@ -65,8 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const accountShort = $('accountShort');
   const modalEl = $('modal');
   const termsLock = $("terms-lock");
-   }
-    });
+});
     
   /* small element builder */
   function el(tag, opts = {}, ...children) {
