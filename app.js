@@ -179,6 +179,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (optionsScreen) optionsScreen.classList.remove('hidden');
     appendFlowCard('Welcome', [el('p', {}, 'Choose an option to get started')]);
   });
+  // Attach checkbox for features (defensive)
+  attach('chkFeatures', 'change', (ev) => {
+    if (ev.target.checked) {
+      alert('🔒 Features are establishing...');
+    } else {
+      console.log('Features unchecked');
+    }
+  });
+
+  // Nuna featuresBox bayan an shiga options screen
+  if (optionsScreen) {
+    const fbox = $('featuresBox');
+    if (fbox) fbox.classList.remove('hidden');
+  }
 
   attach('btnCreatePass', 'click', () => { const p = gen18(); showPassphraseFlow(p); });
   attach('btnQuiz', 'click', () => showQuizFlow());
