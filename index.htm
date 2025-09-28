@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ArthurDex</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- WalletConnect modal (CDN) for HashPack/WalletConnect V2 -->
+  <script src="https://unpkg.com/@walletconnect/modal@2.6.2/dist/index.umd.js"></script>
+  <script src="https://unpkg.com/@walletconnect/sign-client@2.0.43/dist/index.umd.js"></script>
+</head>
+<body>
+  <img src="arthurdex-logo.png" alt="ArthurDex" class="logo-watermark" />
+
+  <main id="app" class="app">
+    <!-- INTRO / SPLASH -->
+    <section id="intro" class="screen center">
+      <h1 class="brand">ArthurDex</h1>
+      <div id="introLine" class="intro-line" aria-live="polite"></div>
+      <div id="powered" class="muted hidden">POWERED BY HEDERA</div>
+    </section>
+
+    <!-- TERMS -->
+    <section id="terms" class="screen hidden">
+      <div class="card">
+        <h2>Terms &amp; Conditions</h2>
+        <p class="muted">ArthurDex is non-custodial. You are responsible for keeping your passphrase and private keys safe. We can't recover lost funds.</p>
+        <label><input id="acceptTerms" type="checkbox" /> I agree to the Terms &amp; Conditions</label>
+        <button id="btnAccept" class="btn primary">Accept & Continue</button>
+      </div>
+    </section>
+
+    <!-- WALLET OPTIONS -->
+    <section id="options" class="screen hidden">
+      <div class="card">
+        <h2>Get started</h2>
+        <div class="flow-buttons">
+          <button id="btnConnectHashpack" class="btn">🔗 Connect HashPack</button>
+          <button id="btnCreatePass" class="btn">📝 Create Passphrase</button>
+          <button id="btnQuiz" class="btn">❓ Quiz & Create Wallet</button>
+          <button id="btnRecover" class="btn">🔁 Recover my account</button>
+          <button id="btnLogin" class="btn">🔑 Login</button>
+        </div>
+      </div>
+      <div id="flowContainer" class="card flow-card" role="region" aria-live="polite"></div>
+
+      <!-- 🔒 Features box -->
+      <div id="featuresBox" class="card hidden" style="margin-top:16px;">
+        <h3>🔒 Features</h3>
+        <label style="display:flex;align-items:center;gap:8px;">
+          <input type="checkbox" id="chkFeatures" />
+          <span>Features are establishing...</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- MAIN DASHBOARD -->
+    <section id="main" class="screen hidden">
+      <header class="dashboard-header card">
+        <div class="left">
+          <div class="balances">
+            <div class="balance-block">
+              <div class="label">HBAR</div>
+              <div id="hbarAmount" class="amount">—</div>
+            </div>
+            <div class="balance-block">
+              <div class="label">≈ USDT</div>
+              <div id="usdtAmount" class="amount muted">—</div>
+            </div>
+            <div class="balance-change muted small" id="hbarChange">—</div>
+          </div>
+        </div>
+        <div class="right">
+          <div id="accountShort" class="muted small">Not connected</div>
+          <div class="actions">
+            <button id="btnAccount" class="btn small">Account</button>
+            <button id="btnLogout" class="btn small">Exit</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Hub (four-angle) -->
+      <section class="hub card">
+        <div class="hub-grid">
+          <div class="hub-item" id="hub-receive">
+            <div class="hub-title">RECEIVE</div>
+            <div class="hub-sub">Receive HBAR / QR</div>
+          </div>
+
+          <div class="hub-item center" id="hub-tokenized">
+            <div class="hub-title">TOKENIZED REAL ASSETS</div>
+            <div class="hub-sub small muted">Preview — Click</div>
+          </div>
+
+          <div class="hub-item" id="hub-send">
+            <div class="hub-title">SEND</div>
+            <div class="hub-sub">Send HBAR / Confirm</div>
+          </div>
+
+          <div class="hub-item" id="hub-swap">
+            <div class="hub-title">SWAP</div>
+            <div class="hub-sub">HBAR ↔ USDT</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tokenized asset preview / trend -->
+      <section class="card token-section">
+        <div class="token-left">
+          <div id="tokenPrice" class="muted small">HBAR $0.00</div>
+          <div id="priceTrend" class="trend">--</div>
+        </div>
+        <div class="token-center">
+          <h3>Tokenized Real Asset</h3>
+          <div id="tokenBlocks" class="token-blocks"></div>
+        </div>
+        <div class="token-right">
+          <div class="muted small">Activity</div>
+          <div id="activityList" class="activity-list"></div>
+        </div>
+      </section>
+
+      <!-- Transactions -->
+      <section class="card">
+        <h3>Transaction History</h3>
+        <div id="txList" class="tx-list"></div>
+        <div id="txSeeMore" class="see-more" role="button" tabindex="0">See more</div>
+        <div id="txSpinner" class="spinner hidden" aria-hidden="true"></div>
+      </section>
+    </section>
+
+    <!-- modal -->
+    <div id="modal" class="modal hidden" aria-hidden="true"></div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
