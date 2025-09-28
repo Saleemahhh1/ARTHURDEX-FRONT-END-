@@ -64,19 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const activityList = $('activityList');
   const accountShort = $('accountShort');
   const modalEl = $('modal');
-  const termsLock = document.getElementById("terms-lock");
-
-  if (acceptTerms && continueBtn && termsLock) {
-    continueBtn.disabled = true; // ba za a iya danna ba sai an tick
-
-    acceptTerms.addEventListener("change", () => {
-      if (acceptTerms.checked) {
-        continueBtn.disabled = false;
-        termsLock.textContent = "🔓"; // idan an tick => ya buɗe
-      } else {
-        continueBtn.disabled = true;
-        termsLock.textContent = "🔒"; // idan ba a tick ba => ya kulle
-      }
+  const termsLock = $("terms-lock");
+   }
     });
     
   /* small element builder */
