@@ -45,28 +45,24 @@ async function guardedFetch(rawUrl, opts = {}, timeout = 12000) {
   }
 }
 
-/* ---------------- DOM-safe init ---------------- */
-document.addEventListener('DOMContentLoaded', () => {
-  // Grab elements (may be null in some pages; code is defensive)
-  const introLine = $('introLine');
-  const introScreen = $('intro');
-  const powered = $('powered');
-  const termsScreen = $('terms');
-  const optionsScreen = $('options');
-  const flowContainer = $('flowContainer');
-  const mainScreen = $('main');
-  const hbarEl = $('hbarAmount');
-  const usdtEl = $('usdtAmount');
-  const txListEl = $('txList');
-  const txSeeMore = $('txSeeMore');
-  const txSpinner = $('txSpinner');
-  const tokenBlocks = $('tokenBlocks');
-  const activityList = $('activityList');
-  const accountShort = $('accountShort');
-  const modalEl = $('modal');
-  const termsLock = $("terms-lock");
-});
-    
+// DOM element references – global scope
+const introLine = document.getElementById('introLine');
+const introScreen = document.getElementById('intro');
+const powered = document.getElementById('powered');
+const termsScreen = document.getElementById('terms');
+const optionsScreen = document.getElementById('options');
+const flowContainer = document.getElementById('flowContainer');
+const mainScreen = document.getElementById('main');
+const hbarEl = document.getElementById('hbarAmount');
+const usdtEl = document.getElementById('usdtAmount');
+const txListEl = document.getElementById('txList');
+const txSeeMore = document.getElementById('txSeeMore');
+const txSpinner = document.getElementById('txSpinner');
+const tokenBlocks = document.getElementById('tokenBlocks');
+const activityList = document.getElementById('activityList');
+const accountShort = document.getElementById('accountShort');
+const modalEl = document.getElementById('modal');
+const termsLock = document.getElementById('terms-lock');
   /* small element builder */
   function el(tag, opts = {}, ...children) {
     const e = document.createElement(tag);
