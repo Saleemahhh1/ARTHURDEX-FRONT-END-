@@ -64,10 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const activityList = $('activityList');
   const accountShort = $('accountShort');
   const modalEl = $('modal');
-  
-document.addEventListener("DOMContentLoaded", () => {
-  const acceptTerms = document.getElementById("accept-terms");
-  const continueBtn = document.getElementById("continue-btn");
   const termsLock = document.getElementById("terms-lock");
 
   if (acceptTerms && continueBtn && termsLock) {
