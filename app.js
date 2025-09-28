@@ -1,29 +1,26 @@
-TO GA APP.JS DIN KADUBAH KO AKWAE WANI MATSALAN
-
 // app.js (ArthurDex frontend - full flow, crash-proof)
 // IMPORTANT: Update BACKEND_URL if your backend is at a different URL
 const PROJECT_ID = "031c9ba70da1c67907ed7484f7a6aa64";
 const BACKEND_URL = "https://arthurdex.onrender.com"; // ← use your Render URL
 
-/* ---------------- DOM ---------------- */
-const $ = id => document.getElementById(id);
-const introLine = $("introLine");
-const introScreen = $("intro");
-const powered = $("powered");
-const termsScreen = $("terms");
-const optionsScreen = $("options");
-const flowContainer = $("flowContainer");
-const mainScreen = $("main");
-const hbarEl = $("hbarAmount");
-const usdtEl = $("usdtAmount");
-const txListEl = $("txList");
-const txSeeMore = $("txSeeMore");
-const txSpinner = $("txSpinner");
-const tokenBlocks = $("tokenBlocks");
-const activityList = $("activityList");
-const accountShort = $("accountShort");
-const modalEl = $("modal");
-
+// DOM element references – global scope
+const introLine = document.getElementById('introLine');
+const introScreen = document.getElementById('intro');
+const powered = document.getElementById('powered');
+const termsScreen = document.getElementById('terms');
+const optionsScreen = document.getElementById('options');
+const flowContainer = document.getElementById('flowContainer');
+const mainScreen = document.getElementById('main');
+const hbarEl = document.getElementById('hbarAmount');
+const usdtEl = document.getElementById('usdtAmount');
+const txListEl = document.getElementById('txList');
+const txSeeMore = document.getElementById('txSeeMore');
+const txSpinner = document.getElementById('txSpinner');
+const tokenBlocks = document.getElementById('tokenBlocks');
+const activityList = document.getElementById('activityList');
+const accountShort = document.getElementById('accountShort');
+const modalEl = document.getElementById('modal');
+const termsLock = document.getElementById('terms-lock');
 /* ---------------- Utilities ---------------- */
 function el(tag, opts = {}, ...children) {
 const e = document.createElement(tag);
