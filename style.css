@@ -11,11 +11,10 @@ body{margin:0;font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;background:l
 .card{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.6)}
 .brand{font-size:40px;color:var(--accent);letter-spacing:1px;margin:0}
 .intro-line{font-size:20px;color:var(--accent);text-align:center;min-height:42px;white-space:pre-wrap}
-#terms-message {
+*{terms-message}
   color: var(--muted);
   font-size: 0.9rem;
   margin-top: 8px;
-}
 .muted{color:var(--muted)}
 .hidden{display:none}
 .flow-buttons{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px}
