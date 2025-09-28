@@ -64,7 +64,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const activityList = $('activityList');
   const accountShort = $('accountShort');
   const modalEl = $('modal');
+  
+document.addEventListener("DOMContentLoaded", () => {
+  const acceptTerms = document.getElementById("accept-terms");
+  const continueBtn = document.getElementById("continue-btn");
+  const termsLock = document.getElementById("terms-lock");
 
+  if (acceptTerms && continueBtn && termsLock) {
+    continueBtn.disabled = true; // ba za a iya danna ba sai an tick
+
+    acceptTerms.addEventListener("change", () => {
+      if (acceptTerms.checked) {
+        continueBtn.disabled = false;
+        termsLock.textContent = "🔓"; // idan an tick => ya buɗe
+      } else {
+        continueBtn.disabled = true;
+        termsLock.textContent = "🔒"; // idan ba a tick ba => ya kulle
+      }
+    });
+    
   /* small element builder */
   function el(tag, opts = {}, ...children) {
     const e = document.createElement(tag);
