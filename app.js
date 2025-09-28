@@ -179,7 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (optionsScreen) optionsScreen.classList.remove('hidden');
     appendFlowCard('Welcome', [el('p', {}, 'Choose an option to get started')]);
   });
-  // Attach checkbox for features (defensive)
+  
+  // Attach checkbox for features only on terms dashboard (defensive)
   attach('chkFeatures', 'change', (ev) => {
     if (ev.target.checked) {
       alert('🔒 Features are establishing...');
