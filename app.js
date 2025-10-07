@@ -39,8 +39,7 @@ clearTimeout(id);
 console.warn('[guardedFetch] error', rawUrl, err && err.message ? err.message : err);
 return { ok: false, error: err };
 }
-}
-} finally {
+  { finally 
   clearTimeout(id);
 }
 // DOM element references – global scope
@@ -361,7 +360,7 @@ if (usdtEl) usdtEl.textContent = '...';
 if (txListEl) txListEl.innerHTML = '';
 if (activityList) activityList.innerHTML = '';
 const pct = ((Math.random() * 2 - 1) * 3).toFixed(2);
-try 
+try}
   if (active) {  
     // balance endpoint  
     const r = await guardedFetch(`/api/balance/${encodeURIComponent(active)}`, { method: 'GET' }, 10000);  
@@ -541,7 +540,7 @@ const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'>
     ${String(text).slice(0,20)}...
   </text>
 </svg>`;
-  return `data:image/ svg+xlm;base64,' + btoa(svg);
+  return `data:image/svg+xml;base64,${btoa(svg)}`;
 }
 // Account management UI
 attach('btnAccount', 'click', () => {
