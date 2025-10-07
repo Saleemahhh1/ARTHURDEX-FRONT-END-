@@ -1,8 +1,5 @@
 // app.js (full, crash-proof, expects config.js loaded first)
 
-// Read config set by config.js
-const BACKEND_URL = (window?.arthurdexConfig?.BACKEND_URL || "https://arthurdex.onrender.com").replace(/\/+$/, '');
-
 /* ---------------- small helpers ---------------- */
 const $ = id => document.getElementById(id);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
