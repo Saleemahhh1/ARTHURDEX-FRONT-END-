@@ -302,7 +302,7 @@ await showPasswordCreationAndRegister(passphrase);
 appendFlowCard('Recover Account', [inp, btn, fb]);
 }
 
-/* ---------------- WalletConnect / HashPack (CDN libs must be loaded) ---------------- /
+/* ---------------- WalletConnect / HashPack (CDN libs must be loaded) ---------------- */
 async function connectHashPackFlow() {
 appendFlowCard('Connecting HashPack', [el('p', {}, 'Opening WalletConnect modal...')]);
 try {
@@ -532,10 +532,13 @@ return pw.length > 0;
 }
 
 function generateQRCodeDataUri(text) {
-const svg = <svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><rect width='180' height='180' fill='#0b0f1a'/><text x='10' y='90' fill='#00c8d1' font-size='10'>${String(text).slice(0,20)}...</text></svg>;
-return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-}
-
+const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'>
+  <rect width='180' height='180' fill='#0b0f1a'/>
+  <text x='10' y='90' fill='#00c8d1' font-size='10'>
+    ${String(text).slice(0,20)}...
+  </text>
+</svg>`;
+  
 // Account management UI
 attach('btnAccount', 'click', () => {
 const vault = ensureVault();
