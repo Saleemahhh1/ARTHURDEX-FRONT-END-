@@ -40,6 +40,9 @@ console.warn('[guardedFetch] error', rawUrl, err && err.message ? err.message : 
 return { ok: false, error: err };
 }
 }
+} finally {
+  clearTimeout(id);
+}
 // DOM element references – global scope
 document.addEventListener("DOMContentLoaded", () => {
    console.log("Arthurdex frontend initialized ✅");
@@ -206,7 +209,7 @@ const idxs = [];
 while (idxs.length < 4) { let r = Math.floor(Math.random() * 18); if (!idxs.includes(r)) idxs.push(r); }
 idxs.sort((a,b) => a-b);
 const instr = el('p', { className: 'hint' }, `Enter words #${idxs.map(i=>i+1).join(', ')}`);
-const inputs = idxs.map((i) => el('input', { placeholder: Word ${i+1}, style: 'width:100%;padding:8px;margin:6px 0;border-radius:6px' }));
+const inputs = idxs.map(i => el('input', { placeholder: `Word ${i + 1}`, style: 'width:100%;padding:8px;margin:6px 0;border-radius:6px' }));
 const fb = el('div', { className: 'muted' });
 const btn = el('button', { className: 'btn' }, 'Confirm');
 btn.onclick = async () => {
@@ -326,8 +329,7 @@ events: ["accountsChanged"]
 });
 if (uri) modal.openModal({ uri });
 const session = await approval();
-try { modal.closeModal(); } catch (e) { / ignore */ }
-
+try { modal.closeModal(); } catch (e) { /* ignore */ }
 const hederaNs = session.namespaces?.hedera;  
   const acct = hederaNs?.accounts?.[0] || null;  
   if (acct) {  
@@ -358,8 +360,8 @@ if (hbarEl) hbarEl.textContent = '...';
 if (usdtEl) usdtEl.textContent = '...';
 if (txListEl) txListEl.innerHTML = '';
 if (activityList) activityList.innerHTML = '';
-
-try {  
+const pct = ((Math.random() * 2 - 1) * 3).toFixed(2);
+try 
   if (active) {  
     // balance endpoint  
     const r = await guardedFetch(`/api/balance/${encodeURIComponent(active)}`, { method: 'GET' }, 10000);  
@@ -539,6 +541,7 @@ const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'>
     ${String(text).slice(0,20)}...
   </text>
 </svg>`;
+  return `data:image/ svg+xlm;base64,' + btoa(svg);
 }
 // Account management UI
 attach('btnAccount', 'click', () => {
