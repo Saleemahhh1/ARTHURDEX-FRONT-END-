@@ -1,8 +1,7 @@
 // app.js (full, crash-proof, expects config.js loaded first)
 
 // Read config set by config.js
-const PROJECT_ID = window?.arthurdexConfig?.PROJECT_ID || "031c9ba70da1c67907ed7484f7a6aa64";
-const BACKEND_URL = (window?.arthurdexConfig?.BACKEND_URL || "https://arthurdex.onrender.com").replace(//+$/, '');
+const BACKEND_URL = (window?.arthurdexConfig?.BACKEND_URL || "https://arthurdex.onrender.com").replace(/\/+$/, '');
 
 /* ---------------- small helpers ---------------- */
 const $ = id => document.getElementById(id);
