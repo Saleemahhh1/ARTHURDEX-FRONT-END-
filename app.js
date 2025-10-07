@@ -41,7 +41,7 @@ return { ok: false, error: err };
 }
 }
 // DOM element references – global scope
-document.addEventlistener("DOMContentLoaded",) () => {
+document.addEventListener("DOMContentLoaded", () => {
    console.log("Arthurdex frontend initialized ✅");
   ...
 const introLine = document.getElementById('introLine');
@@ -539,7 +539,7 @@ const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'>
     ${String(text).slice(0,20)}...
   </text>
 </svg>`;
-  
+}
 // Account management UI
 attach('btnAccount', 'click', () => {
 const vault = ensureVault();
