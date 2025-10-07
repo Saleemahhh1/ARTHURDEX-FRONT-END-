@@ -189,9 +189,9 @@ const v = ensureVault(); delete v.auth; saveVault(v); location.reload();
 
 /* ---------------- flows: create / verify / register ---------------- */
 function showPassphraseFlow(passphrase) {
-const passEl = el('p', { className: 'passphrase' }, passphrase);
+const passEl = el('p', `{ className: 'passphrase' }, passphrase);
 const copyBtn = el('button', { className: 'btn' }, 'Copy passphrase');
-const verifyBtn = el('button', { className: 'btn' }, 'Verify & Create Account');
+const verifyBtn = el('button', `{ className: 'btn' }, 'Verify & Create Account');
 const hint = el('div', { className: 'hint' }, 'Copy and keep it safe. You will verify 4 words.');
 copyBtn.onclick = async () => {
 try { await navigator.clipboard.writeText(passphrase); copyBtn.textContent = 'Copied ✓'; copyBtn.disabled = true; }
@@ -361,7 +361,7 @@ if (txListEl) txListEl.innerHTML = '';
 if (activityList) activityList.innerHTML = '';
 const pct = ((Math.random() * 2 - 1) * 3).toFixed(2);
 try}
-  if (active) {  
+  {if (active) }
     // balance endpoint  
     const r = await guardedFetch(`/api/balance/${encodeURIComponent(active)}`, { method: 'GET' }, 10000);  
     if (r.ok && r.data) {  
@@ -414,7 +414,7 @@ if (txSeeMore) txSeeMore.addEventListener('click', async () => {
 if (txSpinner) txSpinner.classList.remove('hidden');
 try {
 const vault = ensureVault(); const active = vault.activeAccountId;
-const tr = await guardedFetch(/api/transactions/${encodeURIComponent(active)}, {}, 10000);
+const tr = await guardedFetch(`/api/transactions`/${encodeURIComponent(active)}, {}, 10000);
 let list = [];
 if (tr.ok && tr.data) list = Array.isArray(tr.data) ? tr.data : (tr.data.transactions || []);
 showModal('All transactions', el('div', {}, ...list.map(t => el('p', {}, ${t.txId || t.id || t.transactionId} • ${t.result || t.status}))));
