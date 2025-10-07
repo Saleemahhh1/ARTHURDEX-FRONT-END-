@@ -9,14 +9,12 @@ const $ = id => document.getElementById(id);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 /* ---------------- guardedFetch (prefix + timeout + JSON-safe) ---------------- */
-async function guardedFetch(rawUrl, opts = {}, timeout = 12000) {
-let url = rawUrl;
-if (typeof rawUrl === 'string' && rawUrl.startsWith('/')) {
-url = ${BACKEND_URL}${rawUrl};
-} else if (typeof rawUrl === 'string' && !/^https?:///i.test(rawUrl)) {
-url = ${BACKEND_URL}/${rawUrl}.replace(//+/g, '/');
-}
 
+if (typeof rawUrl === 'string' && rawUrl.startsWith('/')) {
+  url = `${BACKEND_URL}${rawUrl}`;
+} else if (typeof rawUrl === 'string' && !/^https?:\/\//i.test(rawUrl)) {
+  url = `${BACKEND_URL}/${rawUrl}`.replace(/\/+/g, '/');
+}
 const controller = new AbortController();
 const id = setTimeout(() => controller.abort(), timeout);
 
@@ -46,6 +44,8 @@ return { ok: false, error: err };
 }
 }
 // DOM element references – global scope
+document.addeventlistener("DOMcontentloaded",) () => {
+   console.log("Arthurdex frontend initialized ✅");
 const introLine = document.getElementById('introLine');
 const introScreen = document.getElementById('intro');
 const powered = document.getElementById('powered');
@@ -171,8 +171,8 @@ node.addEventListener(ev, fn);
 }
 
 attach('btnAccept', 'click', () => {
-const chk = $('acceptTerms');
-if (!chk || !chk.checked) { alert('Please accept terms'); return; }
+const chk = $('accept-Terms');
+if (!chk || !chk.checked) { alert('Please accept-terms'); return; }
 if (termsScreen) termsScreen.classList.add('hidden');
 if (optionsScreen) optionsScreen.classList.remove('hidden');
 appendFlowCard('Welcome', [el('p', {}, 'Choose an option to get started')]);
