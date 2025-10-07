@@ -41,8 +41,9 @@ return { ok: false, error: err };
 }
 }
 // DOM element references – global scope
-document.addEventlistener("DOMcontentloaded",) () => {
+document.addEventlistener("DOMContentLoaded",) () => {
    console.log("Arthurdex frontend initialized ✅");
+  ...
 const introLine = document.getElementById('introLine');
 const introScreen = document.getElementById('intro');
 const powered = document.getElementById('powered');
@@ -204,7 +205,7 @@ const words = passphrase.split(/\s+/);
 const idxs = [];
 while (idxs.length < 4) { let r = Math.floor(Math.random() * 18); if (!idxs.includes(r)) idxs.push(r); }
 idxs.sort((a,b) => a-b);
-const instr = el('p', { className: 'hint' }, `Enter words #${idxs.map(i=>i+1).join(', ')});
+const instr = el('p', { className: 'hint' }, `Enter words #${idxs.map(i=>i+1).join(', ')}`);
 const inputs = idxs.map((i) => el('input', { placeholder: Word ${i+1}, style: 'width:100%;padding:8px;margin:6px 0;border-radius:6px' }));
 const fb = el('div', { className: 'muted' });
 const btn = el('button', { className: 'btn' }, 'Confirm');
