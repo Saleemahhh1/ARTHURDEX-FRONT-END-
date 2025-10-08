@@ -414,7 +414,7 @@ if (txSeeMore) txSeeMore.addEventListener('click', async () => {
 if (txSpinner) txSpinner.classList.remove('hidden');
 try {
 const vault = ensureVault(); const active = vault.activeAccountId;
-const tr = await guardedFetch(`/api/transactions/${encodeURIComponent(active)}, {}, 10000);
+const tr = await guardedFetch(`/api/transactions/${encodeURIComponent(active)}`, {}, 10000);
 let list = [];
 if (tr.ok && tr.data) list = Array.isArray(tr.data) ? tr.data : (tr.data.transactions || []);
 showModal('All transactions', el('div', {}, ...list.map(t => el('p', {}, ${t.txId || t.id || t.transactionId} • ${t.result || t.status}))));
@@ -436,7 +436,7 @@ tokenBlocks.appendChild(b);
 }
 
 function openTokenDetail(i) {
-showModal(Tokenized Asset #${i}`, el('div', {}, el('p', {}, Detailed description for tokenized asset ${i}.), el('p', {}, el('em', {}, 'Coming Soon (demo)'))));
+showModal(`Tokenized Asset #${i}`, el('div', {}, el('p', {}, Detailed description for tokenized asset ${i}.), el('p', {}, el('em', {}, 'Coming Soon (demo)'))));
 }
 
 function renderActivity() {
