@@ -42,6 +42,7 @@ return { ok: false, error: err };
 finally {
   clearTimeout(id);
 }
+}
 // DOM element references – global scope
 document.addEventListener("DOMContentLoaded", () => {
    console.log("Arthurdex frontend initialized ✅");
@@ -360,8 +361,8 @@ if (usdtEl) usdtEl.textContent = '...';
 if (txListEl) txListEl.innerHTML = '';
 if (activityList) activityList.innerHTML = '';
 const pct = ((Math.random() * 2 - 1) * 3).toFixed(2);
-try}
-  {if (active) }
+try {
+  if (active) {
     // balance endpoint  
     const r = await guardedFetch(`/api/balance/${encodeURIComponent(active)}`, { method: 'GET' }, 10000);  
     if (r.ok && r.data) {  
