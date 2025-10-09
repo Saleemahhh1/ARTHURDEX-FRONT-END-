@@ -1,8 +1,5 @@
 // app.js (full, crash-proof, expects config.js loaded first)
 
-/* ---------------- small helpers ---------------- */
-const $ = id => document.getElementById(id);
-const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 /* ---------------- guardedFetch (prefix + timeout + JSON-safe) ---------------- */
 async function guardedFetch(rawUrl, opts = {}, timeout = 10000) {
@@ -41,6 +38,8 @@ return { ok: false, error: err };
 }
 finally {
   clearTimeout(id);
+}
+
 }
 // DOM element references – global scope
 document.addEventListener("DOMContentLoaded", () => {
