@@ -168,6 +168,7 @@ const WORDS = ["apple","river","stone","future","cloud","trust","secure","asset"
 function gen18(){ return Array.from({length:18}, ()=> WORDS[Math.floor(Math.random()*WORDS.length)]).join(' '); }
 
 /* ---------------- safe attach helper ---------------- */
+function $(id) { return document.getElementById(id); }
 function attach(id, ev, fn) {
 const node = $(id);
 if (!node) { console.warn('attach: element not found', id); return; }
