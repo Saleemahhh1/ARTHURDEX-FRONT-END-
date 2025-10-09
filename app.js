@@ -111,7 +111,10 @@ modalEl.setAttribute('aria-hidden', 'true');
 
 /* ---------------- intro sequence (defensive) ---------------- */
 const introSteps = ["secure smartest decentralized", "tokenized real world asset", "POWERED BY HEDERA"];
-async function typeWriter(targetEl, text, speed = 50) {
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+  async function typeWriter(targetEl, text, speed = 50) {
 if (!targetEl) return;
 targetEl.textContent = '';
 for (let i = 0; i < text.length; i++) {
@@ -128,7 +131,9 @@ if (termsScreen) termsScreen.classList.remove('hidden');
 return;
 }
 for (let s of introSteps) {
-await typeWriter(introLine, s, 45);
+  await typeWriter(introLine, s, 45);
+  await sleep(500); // Ƙarin jinkiri kafin goge
+}
 introLine.textContent = '';
 }
 powered.classList.remove('hidden');
