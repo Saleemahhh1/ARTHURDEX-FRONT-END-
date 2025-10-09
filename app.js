@@ -42,7 +42,6 @@ return { ok: false, error: err };
 finally {
   clearTimeout(id);
 }
-}
 // DOM element references – global scope
 document.addEventListener("DOMContentLoaded", () => {
    console.log("Arthurdex frontend initialized ✅");
