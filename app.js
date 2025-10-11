@@ -112,30 +112,27 @@ document.addEventListener("DOMContentLoaded", () => {
     await sleep(600);
   }
 
-  async function runIntro() {
-    try {
-      if (!introLine || !introScreen || !termsScreen || !powered) {
-        appendFlowCard('Welcome', [el('p', {}, 'Choose an option to get started')]);
-        if (termsScreen) termsScreen.classList.remove('hidden');
-        return;
-      }
-      for (let s of introSteps) {
-        await typeWriter(introLine, s, 45);
-        await sleep(500);
-      }
-      introLine.textContent = '';
+  // === INTRO SEQUENCE ===
+function runIntro() {
+  const introLine = $('introLine');
+  const powered = $('powered');
+  let i = 0;
+  const text = "Welcome to ArthurDex";
+
+  // Typewriter effect
+  const interval = setInterval(() => {
+    introLine.textContent += text[i++];
+    if (i >= text.length) {
+      clearInterval(interval);
       powered.classList.remove('hidden');
-      await sleep(700);
-      introScreen.classList.add('hidden');
-      powered.classList.add('hidden');
-      termsScreen.classList.remove('hidden');
-    } catch (e) {
-      console.error('Intro error', e);
-      if (introScreen) introScreen.classList.add('hidden');
-      if (termsScreen) termsScreen.classList.remove('hidden');
+
+      // 🔸 Jira seconds 2 kafin komawa "Terms & Conditions"
+      setTimeout(() => {
+        showScreen('terms');
+      }, 2000);
     }
-  }
-  runIntro();
+  }, 80);
+}
 
   const STORAGE_KEY = 'arthurdex_vault_v2';
   function loadVault() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) { return {}; } }
