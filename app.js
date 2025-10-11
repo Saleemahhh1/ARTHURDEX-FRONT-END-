@@ -38,6 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const introLine = document.getElementById('introLine');
   const introScreen = document.getElementById('intro');
+  // add this helper (put BEFORE runIntro)
+  function showScreen(id) {
+    // hide all .screen elements then show the requested one
+    document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('hidden');
+  }
   const powered = document.getElementById('powered');
   const termsScreen = document.getElementById('terms');
   const optionsScreen = document.getElementById('options');
@@ -158,13 +165,12 @@ function runIntro() {
   }
 
   attach('btnAccept', 'click', () => {
-    const chk = $('accept-terms');
-    if (!chk || !chk.checked) { alert('Please accept-terms'); return; }
-    if (termsScreen) termsScreen.classList.add('hidden');
-    if (optionsScreen) optionsScreen.classList.remove('hidden');
+    const chk = $('accept-terms'); // matches index.html
+    if (!chk || !chk.checked) { alert('Please accept terms'); return; }
+    showScreen('options');
     appendFlowCard('Welcome', [el('p', {}, 'Choose an option to get started')]);
   });
-
+  
   attach('btnCreatePass', 'click', () => { const p = gen18(); showPassphraseFlow(p); });
   attach('btnQuiz', 'click', () => showQuizFlow());
   attach('btnRecover', 'click', () => showRecoveryFlow());
