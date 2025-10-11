@@ -1,4 +1,4 @@
-// main.js (full build with console logs intact)
+// app.js (full build with console logs intact)
 async function guardedFetch(rawUrl, opts = {}, timeout = 10000) {
   let url = rawUrl;
   if (typeof rawUrl === 'string' && rawUrl.startsWith('/')) {
