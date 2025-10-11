@@ -338,7 +338,9 @@ function connectHashPackFlow() {
     showDashboard();
   }, 1500);
 }
-
+ // === HUB DASHBOARD BUTTONS ===
+attach('hub-send', 'click', showSendFlow);
+attach('hub-swap', 'click', showSwapFlow);
 // === UTILS ===
 function shortAcct(str) {
   if (!str) return '--';
