@@ -125,32 +125,30 @@ await sleep(speed);
 }
 await sleep(600);
 }
-async function runIntro() {
-try {
-if (!introLine || !introScreen || !termsScreen || !powered) {
-appendFlowCard('Welcome', [el('p', {}, 'Choose an option to get started')]);
-if (termsScreen) termsScreen.classList.remove('hidden');
-return;
-}
-for (let s of introSteps) {
-  await typeWriter(introLine, s, 45);
-  await sleep(500); // Ƙarin jinkiri kafin goge
-}
-introLine.textContent = '';
-}
-powered.classList.remove('hidden');
-await sleep(700);
-introScreen.classList.add('hidden');
-powered.classList.add('hidden');
-termsScreen.classList.remove('hidden');
-} catch (e) {
-console.error('Intro error', e);
-if (introScreen) introScreen.classList.add('hidden');
-if (termsScreen) termsScreen.classList.remove('hidden');
-}
-}
-runIntro();
 
+async function runIntro() {
+  try {
+    if (!introLine || !introScreen || !termsScreen || !powered) {
+      appendFlowCard('Welcome', [el('p', {}, 'Choose an option to get started')]);
+      if (termsScreen) termsScreen.classList.remove('hidden');
+      return;
+    }
+    for (let s of introSteps) {
+      await typeWriter(introLine, s, 45);
+      await sleep(500);
+    }
+    introLine.textContent = '';
+    powered.classList.remove('hidden');
+    await sleep(700);
+    introScreen.classList.add('hidden');
+    powered.classList.add('hidden');
+    termsScreen.classList.remove('hidden');
+  } catch (e) {
+    console.error('Intro error', e);
+    if (introScreen) introScreen.classList.add('hidden');
+    if (termsScreen) termsScreen.classList.remove('hidden');
+  }
+}
 /* ---------------- vault helpers ---------------- */
 const STORAGE_KEY = 'arthurdex_vault_v2';
 function loadVault() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) { return {}; } }
