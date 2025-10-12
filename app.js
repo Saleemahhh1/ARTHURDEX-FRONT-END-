@@ -147,6 +147,7 @@ async function runIntro() {
     console.error('Intro error', e);
     if (introScreen) introScreen.classList.add('hidden');
     if (termsScreen) termsScreen.classList.remove('hidden');
+    runIntro();
   }
 }
 /* ---------------- vault helpers ---------------- */
