@@ -481,7 +481,14 @@ let unlocked = false;
   if (token) {  
     const pw = prompt('Enter your wallet password to confirm send');  
     if (!pw) { fb.textContent = 'Authorization cancelled'; return; }  
-    const r = await guardedFetch('/api/auth/verify-password', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ password: pw }) }, 10000);  
+    const r = await guardedFetch('/api/auth/verify-password', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${vault.auth.token}`
+  },
+  body: JSON.stringify({ password: pw })
+}, 8000);
     if (r.ok && r.data?.success) unlocked = true;  
     else { fb.textContent = 'Password verification failed'; fb.style.color = '#ff9f9f'; return; }  
   } else {  
