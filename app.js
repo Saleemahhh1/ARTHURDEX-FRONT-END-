@@ -410,7 +410,7 @@ txListEl.innerHTML = '';
 if (!txs || txs.length === 0) { txListEl.innerHTML = '<div class="muted">No recent transactions</div>'; return; }
 txs.forEach(tx => {
 const id = tx.txId || tx.id || tx.transactionId || 'tx-?';
-const right = tx.amount `${tx.amount} HBAR` : '';
+const right = tx.amount ? `${tx.amount} HBAR` : '';
 const d = el('div', { className: 'tx-item' }, `${id} — ${tx.result || tx.status || tx.name || ''} — ${right}`);
 txListEl.appendChild(d);
 });
@@ -423,7 +423,7 @@ const vault = ensureVault(); const active = vault.activeAccountId;
 const tr = await guardedFetch(`/api/transactions/${encodeURIComponent(active)}`, {}, 10000);
 let list = [];
 if (tr.ok && tr.data) list = Array.isArray(tr.data) ? tr.data : (tr.data.transactions || []);
-showModal('All transactions', el('div', {}, ...list.map(t => el('p', {}, ${t.txId || t.id || t.transactionId} • ${t.result || t.status}))));
+showModal('All transactions', el('div', {}, ...list.map(t => el('p', {}, `${t.txId || t.id || t.transactionId} • ${t.result || t.status}`));
 } catch (e) { showModal('Transactions', el('div', {}, 'Failed to load')); }
 finally { if (txSpinner) txSpinner.classList.add('hidden'); }
 });
@@ -433,7 +433,7 @@ if (!tokenBlocks) return;
 tokenBlocks.innerHTML = '';
 for (let i = 1; i <= 3; i++) {
 const b = el('div', { className: 'token-block' },
-el('div', {}, Asset #${i}),
+el('div', {}, `Asset #${i}`),
 el('p', { className: 'muted small' }, 'Sample description'),
 el('button', { className: 'btn small', onclick: () => openTokenDetail(i) }, 'View')
 );
@@ -442,14 +442,14 @@ tokenBlocks.appendChild(b);
 }
 
 function openTokenDetail(i) {
-showModal(`Tokenized Asset #${i}`, el('div', {}, el('p', {}, Detailed description for tokenized asset ${i}.`), el('p', {}, el('em', {}, 'Coming Soon (demo)'))));
+showModal(`Tokenized Asset #${i}`, el('div', {}, el('p', {}, `Detailed description for tokenized asset ${i}.`), el('p', {}, el('em', {}, 'Coming Soon (demo)'))));
 }
 
 function renderActivity() {
 if (!activityList) return;
 activityList.innerHTML = '';
 const v = loadVault(); const active = v.activeAccountId;
-const acts = [`Account ${active || '—'} active, `Connected to backend: ${BACKEND_URL}`, 'Recent activity demo'];
+const acts = [`Account ${active || '—'} active`, `Connected to backend: ${BACKEND_URL}`, 'Recent activity demo'];
 acts.forEach(a => activityList.appendChild(el('p', {}, a)));
 }
 
@@ -458,7 +458,7 @@ if ($('hub-receive')) $('hub-receive').onclick = () => {
 const vault = ensureVault();
 const acct = vault.activeAccountId;
 if (!acct) return showModal('Receive', el('div', {}, 'No active account'));
-showModal('Receive', el('div', {}, el('p', {}, Your account: ${acct}), el('button', { className: 'btn', onclick: () => { navigator.clipboard.writeText(acct); alert('Copied'); } }, 'Copy address'), el('div', {}, el('img', { src: generateQRCodeDataUri(acct), style: 'width:180px;marginTop:10px' }))));
+showModal('Receive', el('div', {}, el('p', {}, `Your account: ${acct`}), el('button', { className: 'btn', onclick: () => { navigator.clipboard.writeText(acct); alert('Copied'); } }, 'Copy address'), el('div', {}, el('img', { src: generateQRCodeDataUri(acct), style: 'width:180px;marginTop:10px' }))));
 };
 if ($('hub-send')) $('hub-send').onclick = () => showSendModal();
 if ($('hub-swap')) $('hub-swap').onclick = () => showSwapModal();
@@ -486,7 +486,7 @@ let unlocked = false;
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${vault.auth.token}`
+    ''Authorization': `Bearer ${vault.auth.token}`
   },
   body: JSON.stringify({ password: pw })
 }, 8000);
