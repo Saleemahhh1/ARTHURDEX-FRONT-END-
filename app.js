@@ -2,6 +2,9 @@ app.js
 
 // app.js (full, crash-proof, expects config.js loaded first)
 
+if (typeof BACKEND_URL === 'undefined') {
+  console.error('BACKEND_URL not defined — ensure config.js is loaded first.');
+}
 
 /* ---------------- guardedFetch (prefix + timeout + JSON-safe) ---------------- */
 async function guardedFetch(rawUrl, opts = {}, timeout = 10000) {
