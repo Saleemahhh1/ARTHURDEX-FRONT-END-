@@ -240,7 +240,7 @@ if (p1.value !== p2.value) { fb.textContent = 'Passwords do not match'; return; 
 fb.textContent = 'Registering...';
 const payload = { username: username.value.trim(), password: p1.value, passphrase };
 const r = await guardedFetch('/api/auth/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }, 15000);
-if (!r.ok) { fb.textContent = Register failed: ${r.error?.message || 'unknown'}; fb.style.color = '#ff9f9f'; console.warn(r.error); return; }
+if (!r.ok) { fb.textContent = `Register failed: ${r.error?.message || 'unknown'}`; fb.style.color = '#ff9f9f'; console.warn(r.error); return; }
 const token = r.data?.token;
 if (token) {
 const vault = ensureVault();
@@ -265,7 +265,7 @@ btn.onclick = async () => {
 if (!u.value || !pw.value) { fb.textContent = 'Enter username & password'; return; }
 fb.textContent = 'Logging in...';
 const r = await guardedFetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: u.value.trim(), password: pw.value }) }, 12000);
-if (!r.ok) { fb.textContent = Login failed: ${r.error?.message || 'unknown'}; fb.style.color = '#ff9f9f'; return; }
+if (!r.ok) { fb.textContent = `Login failed: ${r.error?.message || 'unknown'}`; fb.style.color = '#ff9f9f'; return; }
 const token = r.data?.token;
 if (token) {
 const vault = ensureVault();
