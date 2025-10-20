@@ -461,13 +461,16 @@ if ($('hub-receive')) $('hub-receive').onclick = () => {
 const vault = ensureVault();
 const acct = vault.activeAccountId;
 if (!acct) return showModal('Receive', el('div', {}, 'No active account'));
-showModal('Receive', el('div', {}, el('p', {}, `Your account: ${acct`}), el('button', { className: 'btn', onclick: () => { navigator.clipboard.writeText(acct); alert('Copied'); } }, 'Copy address'), el('div', {}, el('img', { src: generateQRCodeDataUri(acct), style: 'width:180px;marginTop:10px' }))));
+showModal('Receive', el('div', {}, el('p', {}, `Your account: ${acct}`), el('button', { className: 'btn', onclick: () => { navigator.clipboard.writeText(acct); alert('Copied'); } }, 'Copy address'), el('div', {}, el('img', { src: generateQRCodeDataUri(acct), style: 'width:180px;marginTop:10px' }))));
 };
 if ($('hub-send')) $('hub-send').onclick = () => showSendModal();
 if ($('hub-swap')) $('hub-swap').onclick = () => showSwapModal();
 if ($('hub-tokenized')) $('hub-tokenized').onclick = () => showModal('Tokenized Assets (Preview)', el('div', {}, 'Tokenized module preview (work in progress)'));
 
 // Send modal with server-side password verification fallback
+  btn.onclick = async () => {
+  btn.disabled = true;
+  try {
 function showSendModal() {
 const to = el('input', { placeholder: 'Recipient Account ID', style: 'width:100%;padding:8px' });
 const amt = el('input', { placeholder: 'Amount (HBAR)', style: 'width:100%;padding:8px' });
@@ -489,7 +492,7 @@ let unlocked = false;
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    ''Authorization': `Bearer ${vault.auth.token}`
+    'Authorization': `Bearer ${vault.auth.token}`
   },
   body: JSON.stringify({ password: pw })
 }, 8000);
@@ -510,11 +513,17 @@ let unlocked = false;
     await sleep(700);  
     goToMainDashboard();  
   }  
-};  
+    // existing send code
+  } finally {
+    setTimeout(() => btn.disabled = false, 2000);
+  }
+};
 showModal('Send HBAR', el('div', {}, to, amt, btn, fb));
 
 }
-
+btn.onclick = async () => {
+  btn.disabled = true;
+  try {
 function showSwapModal() {
 const direction = el('select', {}, el('option', {}, 'HBAR → USDT'), el('option', {}, 'USDT → HBAR'));
 const amt = el('input', { placeholder: 'Amount', style: 'width:100%;padding:8px' });
@@ -528,6 +537,10 @@ saveVault(v);
 fb.textContent = '✅ Swap simulated'; fb.style.color = '#9fffcc';
 await sleep(500);
 goToMainDashboard();
+} 
+  finally {
+    setTimeout(() => btn.disabled = false, 2000);
+  }
 };
 showModal('Swap', el('div', {}, direction, amt, btn, fb));
 }
