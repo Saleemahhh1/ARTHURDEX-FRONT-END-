@@ -426,7 +426,9 @@ const vault = ensureVault(); const active = vault.activeAccountId;
 const tr = await guardedFetch(`/api/transactions/${encodeURIComponent(active)}`, {}, 10000);
 let list = [];
 if (tr.ok && tr.data) list = Array.isArray(tr.data) ? tr.data : (tr.data.transactions || []);
-showModal('All transactions', el('div', {}, ...list.map(t => el('p', {}, `${t.txId || t.id || t.transactionId} • ${t.result || t.status}`));
+showModal('All transactions', el('div', {}, ...list.map(t => 
+  el('p', {}, `${t.txId || t.id || t.transactionId} • ${t.result || t.status}`)
+)));
 } catch (e) { showModal('Transactions', el('div', {}, 'Failed to load')); }
 finally { if (txSpinner) txSpinner.classList.add('hidden'); }
 });
