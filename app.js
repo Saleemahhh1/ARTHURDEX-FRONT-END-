@@ -292,7 +292,7 @@ if (!text) { fb.textContent = 'Enter passphrase or private key'; return; }
 if (text.split(/\s+/).length === 18) {
 fb.textContent = 'Recovering by passphrase...';
 const r = await guardedFetch('/api/auth/recover', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ passphrase: text }) }, 12000);
-if (!r.ok) { fb.textContent = Recover failed: ${r.error?.message || 'unknown'}; fb.style.color = '#ff9f9f'; return; }
+if (!r.ok) { fb.textContent = `Recover failed: ${r.error?.message || 'unknown'}`; fb.style.color = '#ff9f9f'; return; }
 const token = r.data?.token;
 if (token) {
 const vault = ensureVault(); vault.auth = { token }; saveVault(vault);
@@ -410,8 +410,8 @@ txListEl.innerHTML = '';
 if (!txs || txs.length === 0) { txListEl.innerHTML = '<div class="muted">No recent transactions</div>'; return; }
 txs.forEach(tx => {
 const id = tx.txId || tx.id || tx.transactionId || 'tx-?';
-const right = tx.amount ? ${tx.amount} HBAR : '';
-const d = el('div', { className: 'tx-item' }, ${id} — ${tx.result || tx.status || tx.name || ''} — ${right});
+const right = tx.amount `${tx.amount} HBAR` : '';
+const d = el('div', { className: 'tx-item' }, `${id} — ${tx.result || tx.status || tx.name || ''} — ${right}`);
 txListEl.appendChild(d);
 });
 }
@@ -442,14 +442,14 @@ tokenBlocks.appendChild(b);
 }
 
 function openTokenDetail(i) {
-showModal(`Tokenized Asset #${i}`, el('div', {}, el('p', {}, Detailed description for tokenized asset ${i}.), el('p', {}, el('em', {}, 'Coming Soon (demo)'))));
+showModal(`Tokenized Asset #${i}`, el('div', {}, el('p', {}, Detailed description for tokenized asset ${i}.`), el('p', {}, el('em', {}, 'Coming Soon (demo)'))));
 }
 
 function renderActivity() {
 if (!activityList) return;
 activityList.innerHTML = '';
 const v = loadVault(); const active = v.activeAccountId;
-const acts = [Account ${active || '—'} active, Connected to backend: ${BACKEND_URL}, 'Recent activity demo'];
+const acts = [`Account ${active || '—'} active, `Connected to backend: ${BACKEND_URL}`, 'Recent activity demo'];
 acts.forEach(a => activityList.appendChild(el('p', {}, a)));
 }
 
