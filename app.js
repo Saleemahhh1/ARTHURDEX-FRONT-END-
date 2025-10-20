@@ -468,15 +468,14 @@ if ($('hub-swap')) $('hub-swap').onclick = () => showSwapModal();
 if ($('hub-tokenized')) $('hub-tokenized').onclick = () => showModal('Tokenized Assets (Preview)', el('div', {}, 'Tokenized module preview (work in progress)'));
 
 // Send modal with server-side password verification fallback
-  btn.onclick = async () => {
-  btn.disabled = true;
-  try {
 function showSendModal() {
 const to = el('input', { placeholder: 'Recipient Account ID', style: 'width:100%;padding:8px' });
 const amt = el('input', { placeholder: 'Amount (HBAR)', style: 'width:100%;padding:8px' });
 const fb = el('div', { className: 'muted' });
 const btn = el('button', { className: 'btn' }, 'Send');
-btn.onclick = async () => {
+    btn.onclick = async () => {
+  btn.disabled = true;
+  try {
 const toVal = (to.value || '').trim(), amount = parseFloat(amt.value);
 if (!toVal || isNaN(amount) || amount <= 0) { fb.textContent = 'Invalid input'; fb.style.color = '#ff9f9f'; return; }
 const vault = ensureVault(); const active = vault.activeAccountId; const acct = vault.accounts?.[active];
@@ -521,15 +520,14 @@ let unlocked = false;
 showModal('Send HBAR', el('div', {}, to, amt, btn, fb));
 
 }
-btn.onclick = async () => {
-  btn.disabled = true;
-  try {
 function showSwapModal() {
 const direction = el('select', {}, el('option', {}, 'HBAR → USDT'), el('option', {}, 'USDT → HBAR'));
 const amt = el('input', { placeholder: 'Amount', style: 'width:100%;padding:8px' });
 const fb = el('div', { className: 'muted' });
 const btn = el('button', { className: 'btn' }, 'Swap (demo)');
 btn.onclick = async () => {
+  btn.disabled = true;
+  try { {
 const a = parseFloat(amt.value); if (isNaN(a) || a <= 0) { fb.textContent = 'Invalid amount'; fb.style.color = '#ff9f9f'; return; }
 const v = ensureVault(); const active = v.activeAccountId; const acct = v.accounts?.[active];
 acct.hbar = Math.max(0, (acct.hbar || 0) - Math.round(a));
