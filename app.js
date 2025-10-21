@@ -529,7 +529,7 @@ const fb = el('div', { className: 'muted' });
 const btn = el('button', { className: 'btn' }, 'Swap (demo)');
 btn.onclick = async () => {
   btn.disabled = true;
-  try { {
+  try {
 const a = parseFloat(amt.value); if (isNaN(a) || a <= 0) { fb.textContent = 'Invalid amount'; fb.style.color = '#ff9f9f'; return; }
 const v = ensureVault(); const active = v.activeAccountId; const acct = v.accounts?.[active];
 acct.hbar = Math.max(0, (acct.hbar || 0) - Math.round(a));
@@ -556,7 +556,7 @@ return true;
 const pw = prompt('Enter your wallet password to unlock');
 if (!pw) return false;
 if (vault.auth?.token) {
-const r = await guardedFetch('/api/auth/verify-password', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${vault.auth.token} }, body: JSON.stringify({ password: pw }) }, 8000);
+const r = await guardedFetch('/api/auth/verify-password', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${vault.auth.token}` }, body: JSON.stringify({ password: pw }) }, 8000);
 return (r.ok && r.data?.success) || false;
 }
 return pw.length > 0;
