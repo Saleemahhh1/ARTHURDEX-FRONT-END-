@@ -131,7 +131,8 @@ await sleep(600);
 
 async function runIntro() {
   try {
-    if (!introLine || !introScreen || !termsScreen || !powered) {
+    if (!introLine || !introScreen || !termsScreen || !powered)
+    {runIntro();
       appendFlowCard('Welcome', [el('p', {}, 'Choose an option to get started')]);
       if (termsScreen) termsScreen.classList.remove('hidden');
       return;
@@ -150,9 +151,7 @@ async function runIntro() {
     console.error('Intro error', e);
     if (introScreen) introScreen.classList.add('hidden');
     if (termsScreen) termsScreen.classList.remove('hidden');
-    runIntro();
   }
-}
 /* ---------------- vault helpers ---------------- */
 const STORAGE_KEY = 'arthurdex_vault_v2';
 function loadVault() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) { return {}; } }
