@@ -131,12 +131,12 @@ await sleep(600);
 
 async function runIntro() {
   try {
-    if (!introLine || !introScreen || !termsScreen || !powered)
-    {runIntro();
-      appendFlowCard('Welcome', [el('p', {}, 'Choose an option to get started')]);
-      if (termsScreen) termsScreen.classList.remove('hidden');
-      return;
-    }
+    if (!introLine || !introScreen || !termsScreen || !powered) {
+  console.warn('Intro elements missing — skipping animation.');
+  appendFlowCard('Welcome', [el('p', {}, 'Choose an option to get started')]);
+  if (termsScreen) termsScreen.classList.remove('hidden');
+  return;
+}
     for (let s of introSteps) {
       await typeWriter(introLine, s, 45);
       await sleep(500);
