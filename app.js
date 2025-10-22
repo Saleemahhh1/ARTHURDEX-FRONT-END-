@@ -597,9 +597,8 @@ showModal('Backup', el('div', {}, el('p', {}, 'Passphrase:'), el('pre', {}, pass
 };
 showModal('Backup', el('div', {}, pw, btn, fb));
 }
-// start intro animation once page loads
-runIntro();
 // initial placeholder
 appendFlowCard('Welcome', [el('p', {}, 'Choose an option to get started')]);
-
+// start intro animation once page loads
+runIntro();
 }); // DOMContentLoaded end
