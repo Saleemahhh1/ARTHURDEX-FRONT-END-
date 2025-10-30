@@ -129,9 +129,8 @@ npm run preview	Preview production build
 
 HEDERA CERTIFICATE 
 
-https://claim.hashgraphdev.com/certification?oneTimeCode=c7cab750-9d49-11f0-8352-4dd4b7107a64
----
 
+https://drive.google.com/file/d/12gsJ8fjZDGLvyMJoTee5kwAYK3Axjt52/view?usp=sharing
 📜 License
 
 MIT License © 2025 ArthurDex Team
