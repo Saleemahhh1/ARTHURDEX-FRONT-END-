@@ -50,7 +50,7 @@ cd arthurdex-frontend
 2. Install dependencies
 
 npm install
-# ko
+# OR
 yarn install
 
 3. Configure environment variables
